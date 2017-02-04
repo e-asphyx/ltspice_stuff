@@ -15,7 +15,7 @@ Q5 N011 N009 VCC 0 BD140
 Q6 N017 N019 0 0 BD139
 R13 N015 N014 {Rfb}
 C1 out outpp 940µ
-C2 outpp N015 47µ
+C2 outpp N015 100µ
 Q2 N019 N018 N017 0 BC560C
 Q3 N009 N010 N011 0 BC550C
 R4 VCC N009 220
@@ -25,19 +25,17 @@ R9 N010 N016 10k
 R10 N016 N018 {Rbe}
 R14 N018 0 {Rdrv}
 R11 N013 0 1Meg
-C3 N013 N012 0.47µ
+C3 N013 N012 0.33µ
 C4 N010 va 10p
 R15 N005 outpp 1Meg
 R16 N007 0 2Meg
 C5 N006 N005 1µ
+XU1 N005 N007 N006 opamp Aol=100K GBW=10Meg
 Q8 N004 N003 N001 0 BC560C
 R2 HT N001 330
 R17 N004 N006 27k
 Q9 va N004 N003 0 BC560C
 R18 VCC N007 2Meg
-XU1 N007 N005 VCC 0 N006 OPA2134
-C6 N007 0 1µ
-C7 N006 0 1µ
 .model NPN NPN
 .model PNP PNP
 .lib /Users/asphyx/Library/Application Support/LTspice/lib/cmp/standard.bjt
@@ -47,9 +45,9 @@ C7 N006 0 1µ
 .option numdgt=7
 .param Fin = 1k
 *.step param Fin list 1k 10k 20k
-.tran 0 100ms 0 1us
-.four {Fin} V(out)
-*.ac dec 100 1 100k
+*.tran 0 100ms 0 1us
+*.four {Fin} V(out)
+.ac dec 100 1 100k
 *.step param Rload list 18 32 250
 .param Rload = 32
 .meas tran Iq avg I(R7)
@@ -63,6 +61,5 @@ C7 N006 0 1µ
 .param Rfb=Rk*5.7317
 *.param Rfb=24k
 * +15V
-.lib OPA2134.LIB
 .backanno
 .end
